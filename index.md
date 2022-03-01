@@ -1,6 +1,6 @@
 ## Forza
 
-1. [Automatic Speech Recognition(ASR)](https://github.com/TIFOSI528/TIFOSI528.github.io/asr.md) 
+1. [Automatic Speech Recognition(ASR)](https://github.com/TIFOSI528/tifosi528.github.io/blob/main/asr.md) 
 2. 
 
 ### Markdown
