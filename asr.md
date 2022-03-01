@@ -1,4 +1,19 @@
 1. decoding related  
 *  传统的kaldi解码需要构建一个相当大的graph，这个graph融合了语言模型、发音词典、上下文相关音素等信息，使用一个相对简单的解码器在graph上进行最优路径的搜索即可；
 *  虽然这个方法比较简单，解码速度也很快，但是graph的大小一般超过300Mb，大的甚至有几Gb，这么大的模型不适合在移动平台部署，模型的灵活性也受到限制
-（修改某些词汇的出现的概率就需要重新构图）
+（修改某些词汇的出现的概率就需要重新构图）  
+*  因此，kaldi先后支持了另外两种解码方式：
+> **two-pass decoding**  
+>> 1. Fast, efficient (relatively small) models are used to generate restrict-sized lattices first.   
+>> 2. They are then rescored with richer knowledge sources (large) for better performance.  
+>> 3. The potential of the two-pass method is limited by the relatively small knowledge sources used in the first pass.  
+>> 4. The two-pass procedure makes the latency issue unavoidable (主要是lattice rescoring步骤导致的延时，more suitable for offline tasks).  
+>>   
+> **on-the-fly composition**  
+>> 1. WFSTs are separated into two (or more) groups and dynamically composed when needed (one-pass decoding).  
+>> 2. 可以减少内存占用；  
+>> 3. is more flexible than offline composition;  
+>> 4. decoding becomes slower since the search space is not optimised;  
+>> 5. 在解码时会产生额外的计算开销(searching & composing);  
+>> 6. lookahead composition特指HCL ∘ G？  
+
