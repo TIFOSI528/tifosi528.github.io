@@ -17,4 +17,13 @@
 >>> 4. decoding becomes slower since the search space is not optimised;  
 >>> 5. 在解码时会产生额外的计算开销(searching & composing);  
 >>> 6. lookahead composition特指HCL ∘ G？  
+>>> 
+>> **3.  BigLM Decoder**  
+>>> 1. @LvHang提出 HCL ∘ G would lose the advantages of having G inside the optimization(when G is composed inside the determinization, it can be thought of as language model lookahead)  
+>>> 2. 具体做法：create the decoding graph HCLG with a small (e.g. low-order or pruned) LM, and compose dynamically with a WFST representing the difference between a relatively large LM and the small one.  
+>>> 3. The smaller LM can be viewed as the ‘important’ part of the language model, while the Gr stands for the remainder of the language model. --- ‘incremental language model.’  
+
+
+
+
 
